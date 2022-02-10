@@ -3,3 +3,10 @@
 
 #include "TinybuildTestGameModeBase.h"
 
+ATinybuildTestGameModeBase::ATinybuildTestGameModeBase()
+{
+    PlayerControllerClass = ATBPlayerController::StaticClass();
+
+}
+
+
