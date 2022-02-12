@@ -25,8 +25,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	
+
+	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* StaticMesh;
-	//UWidgetComponent* WidgetComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	UWidgetComponent* GeometryWidget;
 
 	
 

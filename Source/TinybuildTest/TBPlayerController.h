@@ -6,7 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "Math/Vector.h"
 #include "FirstBuilding.h"
-#include "Containers/Array.h"
 #include "TBPlayerController.generated.h"
 
 /**
@@ -21,11 +20,19 @@ public:
 
 	ATBPlayerController();
 
-	
+	UFUNCTION(BlueprintCallable)
 	void PreConstructFirstBuilding();
 
+	UPROPERTY(BlueprintReadWrite)
+	bool PreConstructFB = false;
+	UPROPERTY(BlueprintReadWrite)
+	bool PreConstructSB = false;
+
+	int32 LastElem;
+
+
 	TSubclassOf<AFirstBuilding> FirstBuildingClass;
-	TArray<AFirstBuilding> FirstBuildingsArray;
+	//TArray<AFirstBuilding*> FirstBuildingsArray;
 	
 	
 	

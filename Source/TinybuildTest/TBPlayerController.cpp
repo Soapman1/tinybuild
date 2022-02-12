@@ -14,6 +14,23 @@ ATBPlayerController::ATBPlayerController()
 void ATBPlayerController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
+    /*if(PreConstructFB)
+    {
+      FirstBuildingsArray.Last(LastElem);
+      if(LastElem != NULL)
+      {
+        FirstBuildingsArray[LastElem]->SetActorRelativeLocation(MousePosInWorld(),false);
+      }
+      else
+      {
+        GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("Last elem is NULL")));
+      }
+     
+    }*/
+    
+
+
 }
 
 void ATBPlayerController::SetupInputComponent()
@@ -40,14 +57,33 @@ FVector ATBPlayerController::MousePosInWorld()
 
 void ATBPlayerController::PreConstructFirstBuilding()
 {
-  
+  UWorld* World = GetWorld();
+  TArray<AFirstBuilding*> FirstBuildingsArray;
+  if(World)
+  {
   FTransform GeometryTransform = FTransform(FRotator::ZeroRotator, MousePosInWorld());
-  AFirstBuilding* FirstBuildingActor = GetWorld()->SpawnActor<AFirstBuilding>(FirstBuildingClass, GeometryTransform);
-  //FirstBuildingsArray.Add(&FirstBuildingActor);  ??? STUCK HERE
- // FirstBuildingsArray.Last();
- 
-
+  AFirstBuilding* FirstBuildingActor = World->SpawnActor<AFirstBuilding>(FirstBuildingClass, GeometryTransform);
   
+  int32 ElemIndex = FirstBuildingsArray.Add(FirstBuildingActor);
+
+  GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, (TEXT("%s"),FirstBuildingsArray[ElemIndex]->GetName()));  
+ 
+   /* if(FirstBuildingActor)
+      {
+       int32 ElemIndex = FirstBuildingsArray.Add(FirstBuildingActor);
+        PreConstructFB = true;
+      }
+    else 
+    {
+      GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, (TEXT("%s"),FirstBuildingActor->GetName()));
+    }
+
+*/
+  
+  }
+  
+  
+
 
 }
 

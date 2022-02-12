@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "FirstBuilding.h"
 
 // Sets default values
@@ -11,9 +10,11 @@ AFirstBuilding::AFirstBuilding()
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetupAttachment(RootComponent);
 
-	//WidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
-	//WidgetComponent->SetupAttachment(StaticMesh);
-	//WidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
+	GeometryWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("GeometryWidget"));
+	GeometryWidget->SetupAttachment(StaticMesh);
+	GeometryWidget->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
+	GeometryWidget->SetWidgetSpace(EWidgetSpace::Screen);
+	GeometryWidget->SetVisibility(false);
 
 
 }
