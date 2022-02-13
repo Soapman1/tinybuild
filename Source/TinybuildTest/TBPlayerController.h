@@ -30,10 +30,16 @@ public:
 
 	int32 LastElem;
 
-
+	UPROPERTY(EditAnywhere)
 	TSubclassOf<AFirstBuilding> FirstBuildingClass;
-	//TArray<AFirstBuilding*> FirstBuildingsArray;
-	
+
+	UPROPERTY()
+	TArray<AFirstBuilding*> FirstBuildingsArray;
+
+	UFUNCTION()
+	void ClickLeftMouse();
+
+		
 	
 	
 

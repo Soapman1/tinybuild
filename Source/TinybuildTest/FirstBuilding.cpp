@@ -1,6 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "FirstBuilding.h"
+#include "TimerManager.h"
+#include "TinybuildTestGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AFirstBuilding::AFirstBuilding()
@@ -16,6 +19,7 @@ AFirstBuilding::AFirstBuilding()
 	GeometryWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	GeometryWidget->SetVisibility(false);
 
+	
 
 }
 
@@ -23,6 +27,8 @@ AFirstBuilding::AFirstBuilding()
 void AFirstBuilding::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
 	
 }
 
@@ -33,3 +39,29 @@ void AFirstBuilding::Tick(float DeltaTime)
 
 }
 
+void AFirstBuilding::CostructFirstBuilding()
+{
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &AFirstBuilding::IncreaseResources, 1.0f, true, 3.0f);
+}
+
+void AFirstBuilding::IncreaseResources()
+{
+	if(CurrentFirstResource < 500.0f)
+	{
+		CurrentFirstResource += 50.0f; //50 is Value of Resource
+	}
+	
+}
+
+void AFirstBuilding::SendResourcesToStorage()
+{
+	
+	ATinybuildTestGameModeBase* GameMode;
+	if(CurrentFirstResource == 500.0f)
+	{
+		GameMode = Cast<ATinybuildTestGameModeBase>(UGameplayStatics::GetGameMode(this));
+		GameMode->AddFirstResourceToStorage(CurrentFirstResource);
+		CurrentFirstResource -= CurrentFirstResource;
+	}
+
+}

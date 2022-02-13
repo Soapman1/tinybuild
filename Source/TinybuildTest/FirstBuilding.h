@@ -21,6 +21,19 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
+	
+
+	UFUNCTION()
+	void IncreaseResources();
+
+	UPROPERTY()
+	FTimerHandle TimerHandle;
+
+	
+
+
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -32,6 +45,15 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	UWidgetComponent* GeometryWidget;
+
+	UPROPERTY(BlueprintReadWrite)
+	float CurrentFirstResource;
+
+	UFUNCTION()
+	void CostructFirstBuilding();
+
+	UFUNCTION()
+	void SendResourcesToStorage();
 
 	
 

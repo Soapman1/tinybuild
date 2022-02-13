@@ -20,7 +20,10 @@ public:
 
 	ATinybuildTestGameModeBase();
 
-	
+	UFUNCTION()
+	void AddFirstResourceToStorage(float Value);
+
+	float FirstResourceStorage = 0.0f;
 
 	
 };

@@ -8,26 +8,21 @@ ATBPlayerController::ATBPlayerController()
     bShowMouseCursor = true;
     bEnableClickEvents = true;
     bEnableMouseOverEvents = true;
-    DefaultMouseCursor = EMouseCursor::GrabHand;
+    DefaultMouseCursor = EMouseCursor::Default;
 }
 
 void ATBPlayerController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-
-    /*if(PreConstructFB)
+    
+    if(PreConstructFB) //Geometry follow to cursor
     {
+
       FirstBuildingsArray.Last(LastElem);
-      if(LastElem != NULL)
-      {
-        FirstBuildingsArray[LastElem]->SetActorRelativeLocation(MousePosInWorld(),false);
-      }
-      else
-      {
-        GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("Last elem is NULL")));
-      }
-     
-    }*/
+      FirstBuildingsArray[LastElem]->SetActorRelativeLocation(MousePosInWorld(),false);
+      
+      
+    }
     
 
 
@@ -35,16 +30,17 @@ void ATBPlayerController::Tick(float DeltaTime)
 
 void ATBPlayerController::SetupInputComponent()
 {
-
+   Super::SetupInputComponent();
+   InputComponent->BindAction(TEXT("ClickLeftMouse"), IE_Released, this, &ATBPlayerController::ClickLeftMouse);
 
 }
 
-FVector ATBPlayerController::MousePosInWorld()
+FVector ATBPlayerController::MousePosInWorld() //Cursor location to world location func
 {
-    FVector WorldLocation, WorldDirection;
+  FVector WorldLocation, WorldDirection;
   this->DeprojectMousePositionToWorld(WorldLocation, WorldDirection);
 
-  float DistanceAboveGround = 50.0f;
+  float DistanceAboveGround = 120.0f;
   float NotSureWhyThisValue = -1.0f;
   float WhyThisOperation = WorldLocation.Z / WorldDirection.Z + DistanceAboveGround;
 
@@ -58,32 +54,50 @@ FVector ATBPlayerController::MousePosInWorld()
 void ATBPlayerController::PreConstructFirstBuilding()
 {
   UWorld* World = GetWorld();
-  TArray<AFirstBuilding*> FirstBuildingsArray;
+  
   if(World)
   {
+  //Spawn actor under cursor
   FTransform GeometryTransform = FTransform(FRotator::ZeroRotator, MousePosInWorld());
   AFirstBuilding* FirstBuildingActor = World->SpawnActor<AFirstBuilding>(FirstBuildingClass, GeometryTransform);
-  
-  int32 ElemIndex = FirstBuildingsArray.Add(FirstBuildingActor);
+  int32 ElemIndex = FirstBuildingsArray.Add(FirstBuildingActor);   
 
-  GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, (TEXT("%s"),FirstBuildingsArray[ElemIndex]->GetName()));  
- 
-   /* if(FirstBuildingActor)
-      {
-       int32 ElemIndex = FirstBuildingsArray.Add(FirstBuildingActor);
-        PreConstructFB = true;
-      }
-    else 
+  if(FirstBuildingActor)
     {
-      GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, (TEXT("%s"),FirstBuildingActor->GetName()));
+      
+      PreConstructFB = true;
+      //GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("Actor is NOT NULL")));
     }
+  
 
-*/
+
   
   }
   
   
+}
 
+void ATBPlayerController::ClickLeftMouse()
+{
+  //Click on actor event for send resources to storage
+  FHitResult HitResult;
+  GetHitResultUnderCursor(ECollisionChannel::ECC_Pawn, false, HitResult);
+  if(HitResult.GetActor())
+  {
+    
+  }
 
+  
+  if(PreConstructFB)
+  {
+    PreConstructFB = false;
+    FirstBuildingsArray.Last(LastElem);
+    if(FirstBuildingsArray[LastElem])  
+    {
+      FirstBuildingsArray[LastElem]->GeometryWidget->SetVisibility(true);
+      FirstBuildingsArray[LastElem]->CostructFirstBuilding();
+      FirstBuildingsArray.Empty(); // clear array. NEED
+    }
+  }
 }
 

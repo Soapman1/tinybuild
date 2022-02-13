@@ -9,4 +9,7 @@ ATinybuildTestGameModeBase::ATinybuildTestGameModeBase()
 
 }
 
-
+void ATinybuildTestGameModeBase::AddFirstResourceToStorage(float Value)
+{
+    FirstResourceStorage += Value;
+}
