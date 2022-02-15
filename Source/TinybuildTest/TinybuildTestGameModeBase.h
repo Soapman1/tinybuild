@@ -23,7 +23,14 @@ public:
 	UFUNCTION()
 	void AddFirstResourceToStorage(float Value);
 
+	UFUNCTION()
+	void AddSecondResourceToStorage(float Value);
+
+	UPROPERTY(BlueprintReadWrite)
 	float FirstResourceStorage = 0.0f;
+
+	UPROPERTY(BlueprintReadWrite)
+	float SecondResourseStorage = 0.0f;
 
 	
 };

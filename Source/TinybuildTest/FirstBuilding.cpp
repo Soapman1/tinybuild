@@ -5,6 +5,9 @@
 #include "TinybuildTestGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 
+
+
+
 // Sets default values
 AFirstBuilding::AFirstBuilding()
 {
@@ -13,9 +16,13 @@ AFirstBuilding::AFirstBuilding()
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetupAttachment(RootComponent);
 
+	
+	StaticMesh->OnReleased.AddDynamic( this, &AFirstBuilding::SendResourcesToStorage);
+
+
 	GeometryWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("GeometryWidget"));
 	GeometryWidget->SetupAttachment(StaticMesh);
-	GeometryWidget->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
+	GeometryWidget->SetRelativeLocation(FVector(0.0f, 0.0f, 35.0f));
 	GeometryWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	GeometryWidget->SetVisibility(false);
 
@@ -37,9 +44,11 @@ void AFirstBuilding::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+
 }
 
-void AFirstBuilding::CostructFirstBuilding()
+void AFirstBuilding::ConstructFirstBuilding()
 {
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &AFirstBuilding::IncreaseResources, 1.0f, true, 3.0f);
 }
@@ -53,7 +62,7 @@ void AFirstBuilding::IncreaseResources()
 	
 }
 
-void AFirstBuilding::SendResourcesToStorage()
+void AFirstBuilding::SendResourcesToStorage(UPrimitiveComponent* TouchedComponent, FKey InputKey)
 {
 	
 	ATinybuildTestGameModeBase* GameMode;
@@ -65,3 +74,4 @@ void AFirstBuilding::SendResourcesToStorage()
 	}
 
 }
+

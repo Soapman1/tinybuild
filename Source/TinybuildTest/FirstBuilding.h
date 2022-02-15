@@ -40,7 +40,7 @@ public:
 
 	
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* StaticMesh;
 
 	UPROPERTY(VisibleAnywhere)
@@ -50,13 +50,12 @@ public:
 	float CurrentFirstResource;
 
 	UFUNCTION()
-	void CostructFirstBuilding();
+	void ConstructFirstBuilding();
 
 	UFUNCTION()
-	void SendResourcesToStorage();
+	void SendResourcesToStorage(UPrimitiveComponent* TouchedComponent, FKey InputKey);
 
 	
-
 
 
 };

@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Math/Vector.h"
 #include "FirstBuilding.h"
+#include "SecondBuilding.h"
 #include "TBPlayerController.generated.h"
 
 /**
@@ -23,6 +24,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void PreConstructFirstBuilding();
 
+	UFUNCTION(BlueprintCallable)
+	void PreConstructSecondBuilding();
+
 	UPROPERTY(BlueprintReadWrite)
 	bool PreConstructFB = false;
 	UPROPERTY(BlueprintReadWrite)
@@ -33,8 +37,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AFirstBuilding> FirstBuildingClass;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ASecondBuilding> SecondBuildingClass;
+
 	UPROPERTY()
 	TArray<AFirstBuilding*> FirstBuildingsArray;
+
+	UPROPERTY()
+	TArray<ASecondBuilding*> SecondBuildingsArray;
 
 	UFUNCTION()
 	void ClickLeftMouse();
