@@ -35,5 +35,11 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	float SecondResourseStorage = 0.0f;
 
+	UPROPERTY(BlueprintReadWrite)
+	TMap<FString,int32> ResourceStorage;
+
+	UPROPERTY(BlueprintReadWrite)
+	int32 MaxSizeOfStorage = 5000;
+
 	
 };

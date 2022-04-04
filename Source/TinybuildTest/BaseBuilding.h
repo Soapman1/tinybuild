@@ -46,6 +46,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Resource")
 	float ResourceRate = 0.0f;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Resource")
+	FString NameOfResource = "";
+
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* StaticMesh;
 

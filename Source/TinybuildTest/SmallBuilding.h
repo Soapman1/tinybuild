@@ -30,7 +30,7 @@ protected:
 private:
 	
 
-	UFUNCTION()
+	UFUNCTION() 
 	void OnReleasedEvent(UPrimitiveComponent* TouchedComponent, FKey InputKey);
 
 	

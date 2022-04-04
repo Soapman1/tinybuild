@@ -38,11 +38,13 @@ void ABaseBuilding::Tick(float DeltaTime)
 
 }
 
+//Event to start event for mining resource
 void ABaseBuilding::ConstructBuilding(float TimeDelay, float FirstTimeDelay)
 {
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &ABaseBuilding::IncreaseResourceToStorage, TimeDelay, true, FirstTimeDelay);
 }
 
+//Update CurrentResource from 0 to MAX value
 void ABaseBuilding::IncreaseResourceToStorage()
 {
 	if(CurrentResource < MaxResource)
