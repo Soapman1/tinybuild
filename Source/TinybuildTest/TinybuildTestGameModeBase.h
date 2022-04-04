@@ -20,10 +20,13 @@ public:
 
 	ATinybuildTestGameModeBase();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
+	void GetResources(float Value, FString ResourceName);
+
+	UFUNCTION(BlueprintCallable)
 	void AddFirstResourceToStorage(float Value);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void AddSecondResourceToStorage(float Value);
 
 	UPROPERTY(BlueprintReadWrite)

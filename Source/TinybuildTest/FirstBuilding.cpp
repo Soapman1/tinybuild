@@ -66,10 +66,13 @@ void AFirstBuilding::SendResourcesToStorage(UPrimitiveComponent* TouchedComponen
 {
 	
 	ATinybuildTestGameModeBase* GameMode;
+
+
 	if(CurrentFirstResource == 500.0f)
 	{
 		GameMode = Cast<ATinybuildTestGameModeBase>(UGameplayStatics::GetGameMode(this));
 		GameMode->AddFirstResourceToStorage(CurrentFirstResource);
+		//GameMode->GetResource(CurrentFirstResource, "Wood");
 		CurrentFirstResource -= CurrentFirstResource;
 	}
 
