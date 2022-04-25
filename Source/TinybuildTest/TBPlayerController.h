@@ -22,6 +22,9 @@ public:
 	ATBPlayerController();
 
 	UFUNCTION(BlueprintCallable)
+	void PreConstructBuilding(FName NameBuild);
+
+	UFUNCTION(BlueprintCallable)
 	void PreConstructFirstBuilding();
 
 	UFUNCTION(BlueprintCallable)
@@ -31,6 +34,9 @@ public:
 	bool PreConstructFB = false;
 	UPROPERTY(BlueprintReadWrite)
 	bool PreConstructSB = false;
+
+	UPROPERTY()
+	FBuildInfo BuildInfo;
 
 	int32 LastElem;
 

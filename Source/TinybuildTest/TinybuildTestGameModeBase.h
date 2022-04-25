@@ -21,7 +21,7 @@ public:
 	ATinybuildTestGameModeBase();
 
 	UFUNCTION(BlueprintCallable)
-	void GetResources(float Value, FString ResourceName);
+	void GetResources(float Value, FName ResourceName);
 
 	UFUNCTION(BlueprintCallable)
 	void AddFirstResourceToStorage(float Value);
@@ -36,7 +36,7 @@ public:
 	float SecondResourseStorage = 0.0f;
 
 	UPROPERTY(BlueprintReadWrite)
-	TMap<FString,int32> ResourceStorage;
+	TMap<FName,int32> ResourceStorage;
 
 	UPROPERTY(BlueprintReadWrite)
 	int32 MaxSizeOfStorage = 5000;

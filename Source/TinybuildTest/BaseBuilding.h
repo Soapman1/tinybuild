@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/WidgetComponent.h"
+#include "FuncLibrary.h"
 #include "BaseBuilding.generated.h"
 
 UCLASS()
@@ -21,48 +22,69 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void DebugTick(float DeltaTime);
 
 	UPROPERTY()
 	FTimerHandle TimerHandle;
 
-	UPROPERTY(BlueprintReadWrite, Category =  "Timer")
-	float FirstTimerDelay = 0.0f;
+	UPROPERTY()
+	FBuildInfo BuildSetting;
+
+	UPROPERTY()
+	FAdditionalInfo BuildInfo;
+
 	
-	UPROPERTY(BlueprintReadWrite, Category = "Timer")
-	float TimerDelay = 0.0f;
 
-	UPROPERTY(BlueprintReadWrite)
-	float TimeToBuild = 0.0f;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Resource")
-	float MaxResource = 0.0f;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Resource")
-	float CurrentResource = 0.0f;
+	// UPROPERTY(BlueprintReadWrite, Category =  "Timer")
+	// float FirstTimerDelay = 0.0f;
 	
-	UPROPERTY(BlueprintReadWrite, Category = "Resource")
-	float ResourceRate = 0.0f;
+	// UPROPERTY(BlueprintReadWrite, Category = "Timer")
+	// float TimerDelay = 0.0f;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Resource")
-	FString NameOfResource = "";
+	// UPROPERTY(BlueprintReadWrite)
+	// float TimeToBuild = 0.0f;
 
+	// UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Resource")
+	// float MaxResource = 0.0f;
+
+	// UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Resource")
+	// float CurrentResource = 0.0f;
+	
+	// UPROPERTY(BlueprintReadWrite, Category = "Resource")
+	// float ResourceRate = 0.0f;
+
+	
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* StaticMesh;
 
 	UPROPERTY(EditAnywhere)
 	UWidgetComponent* GeometryWidget;
 
+	//for demo
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BuildName")
+		FName InitBuildName;
+
+
 	UFUNCTION()
 	void ConstructBuilding(float TimeDelay, float FirstTimeDelay);
 
-	//UFUNCTION()
-	//void SendResourcesToStorage(UPrimitiveComponent* TouchedComponent, FKey InputKey);
+	UFUNCTION()
+	void SendResourcesToStorage(UPrimitiveComponent* TouchedComponent, FKey InputKey);
+	
 
 	UFUNCTION()
-	void IncreaseResourceToStorage();
+	void CreateResoursebyBuilding();
 
+	UFUNCTION()
+	int32 GetCurrentResource();
+
+	UFUNCTION()
+	void InitBuild(FName NameBuild);
+
+	//NEED to add syncro table and build
 
 };

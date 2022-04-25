@@ -2,6 +2,7 @@
 
 #include "TBPlayerController.h"
 #include "TinybuildTestGameModeBase.h"
+#include "TBGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -52,6 +53,26 @@ FVector ATBPlayerController::MousePosInWorld() //Cursor location to world locati
   FVector ActorWorldLocation = WorldLocation + IsThisNewWorldDirection;
 
   return ActorWorldLocation;
+
+}
+
+void ATBPlayerController::PreConstructBuilding(FName NameBuild)
+{
+  UWorld* World = GetWorld();
+  UTBGameInstance* myGI = Cast<UTBGameInstance>(GetGameInstance());
+  FBuildInfo myBuildInfo;
+
+  if(World)
+  {
+    if(myGI)
+    {
+      myGI->GetBuildInfoByName(NameBuild, myBuildInfo);
+      BuildInfo = myBuildInfo;
+      
+
+    }
+
+  }
 
 }
 

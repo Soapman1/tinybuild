@@ -23,7 +23,7 @@ void ATinybuildTestGameModeBase::AddSecondResourceToStorage(float Value)
 }
 
 //Update resource map (storage)
-void ATinybuildTestGameModeBase::GetResources(float Value, FString ResourceName)
+void ATinybuildTestGameModeBase::GetResources(float Value, FName ResourceName)
 {
 
     float ResourceValue = ResourceStorage[ResourceName];
@@ -31,6 +31,11 @@ void ATinybuildTestGameModeBase::GetResources(float Value, FString ResourceName)
     {
         ResourceValue += Value;
         ResourceStorage[ResourceName] = ResourceValue;
+        if(ResourceStorage[ResourceName] > MaxSizeOfStorage)
+        {
+            ResourceStorage[ResourceName] = MaxSizeOfStorage;
+        }
     }
+    
   
 }
